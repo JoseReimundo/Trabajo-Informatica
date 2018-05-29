@@ -16,10 +16,14 @@ public:
 	virtual ~ObjetoMovil();			// Destructor
 	Vector2D getPos();				// Acceso parte protected
 	void setPos(float x, float y);	// Establecer posicion por el paso de dos parámetros float
+	void setPos(int i, int j);
 	void setPos(Vector2D pos);		// Establecer posicion por el paso de un vector
 	void setVel(float vx, float vy);// EStablecer velocidad por el paso de dos parámetros float
 	void setVel(Vector2D vel);		// Establecer velocidad por el paso de  un vector
 	void setColor(Byte cr, Byte cv, Byte ca);
 	void mueve(float t);			// Gestión del movimiento
+
 	bool comprobarPos(Tablero t);
+	int columna(Tablero t);
+	int fila(Tablero t);
 };

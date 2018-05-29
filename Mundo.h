@@ -9,6 +9,7 @@
 #include "Casilla.h"
 #include "Tablero.h"
 #include "Cubo.h"
+#include "Desplazamiento.h"
 
 
 class Mundo {
@@ -25,8 +26,8 @@ class Mundo {
 	Disparo disparo;*/
 
 	Bonus bonus;
-	Esfera esfera;
-	Cubo cubo;
+	Esfera esfera, esfera2;
+	//Cubo cubo;
 	Caja caja;
 
 	float x_ojo;

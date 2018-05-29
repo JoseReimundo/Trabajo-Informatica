@@ -41,14 +41,18 @@ void Mundo::Inicializa()
 
 	tablero.setTamanio(10, 10);		// Creamos un tablero 10x10
 
-	bonus.setPos(5.0, -45.0f);		// Creamos un bonus
+	/*bonus.setPos(5.0, -45.0f);		// Creamos un bonus
 	cubo.setPos(15.0, -45.0);		// Creamos un cubo
 	cubo.setColor(0, 0, 255);
-	cubo.setLado(10.0f);
+	cubo.setLado(10.0f);*/
 
 	esfera.setRadio(5.0f);
 	esfera.setPos(-45, -45);
 	esfera.setColor(0, 255, 0);
+
+	esfera2.setRadio(5.0f);
+	esfera2.setPos(3,4);
+	esfera2.setColor(255, 0, 0);
 }
 
 void Mundo::Dibuja()
@@ -69,20 +73,33 @@ void Mundo::Dibuja()
 
 						//bonus.dibuja();
 
-	cubo.dibuja();
+	//cubo.dibuja();
 
 	esfera.Dibuja();
+	esfera2.Dibuja();
 }
 
 void Mundo::Mueve()
 {
 	//bonus.mueve(0.5);
-	cubo.mueve(0.25);
+	//cubo.mueve(0.25);
 	esfera.mueve(0.25);
+	esfera2.mueve(0.25);
+
+	Interaccion::choque(esfera2, esfera);
+	Interaccion::choque(esfera, esfera2);
+	
+
 	Interaccion::choque(esfera, caja);
-	Interaccion::movimiento_vertical(esfera, tablero);
-	Interaccion::choque(cubo, caja);
-	Interaccion::choque(esfera, cubo);	
+	Interaccion::choque(esfera2, caja);
+
+	//Interaccion::movimiento_vertical(esfera, tablero);
+	//Interaccion::movimiento_vertical(esfera2, tablero);
+
+	
+
+	//Interaccion::choque(cubo, caja);
+	//Interaccion::choque(esfera, cubo);	
 }
 
 void Mundo::Tecla(unsigned char key)
@@ -108,24 +125,31 @@ void Mundo::teclaEspecial(unsigned char key)
 {
 	switch (key) {
 	case GLUT_KEY_LEFT:
-		Interaccion::desplazamiento(cubo, tablero, -5.0f, 0.0f);
-		if (Interaccion::movimiento_horizontal(esfera, tablero))
-			esfera.setVel(-5.0f, 0.0f);
+		
+		Desplazamiento::desplazamientoHorizontal(esfera, tablero);
+		Desplazamiento::desplazamientoHorizontal(esfera2, tablero);
 		break;
 	case GLUT_KEY_RIGHT:
-		Interaccion::desplazamiento(cubo, tablero, 5.0f, 0.0f);
+		
+		//Interaccion::desplazamiento(cubo, tablero, 5.0f, 0.0f);
 		if (Interaccion::movimiento_horizontal(esfera, tablero))
-			esfera.setVel(5.0f, 0.0f);
+			esfera.setVel(5.0f, 0.0f); 
+		if (Interaccion::movimiento_horizontal(esfera2, tablero))
+			esfera2.setVel(5.0f, 0.0f);
 		break;
 	case GLUT_KEY_UP:
-		Interaccion::desplazamiento(cubo, tablero, 0.0f, 5.0f);
+		//Interaccion::desplazamiento(cubo, tablero, 0.0f, 5.0f);
 		if (Interaccion::movimiento_vertical(esfera, tablero))
 			esfera.setVel(0.0f, 5.0f);
+		if (Interaccion::movimiento_vertical(esfera2, tablero))
+			esfera2.setVel(0.0f, 5.0f);
 		break;
 	case GLUT_KEY_DOWN:
-		Interaccion::desplazamiento(cubo, tablero, 0.0, -5.0f);
+		//Interaccion::desplazamiento(cubo, tablero, 0.0, -5.0f);
 		if (Interaccion::movimiento_vertical(esfera, tablero))
 			esfera.setVel(0.0f, -5.0f);
+		if (Interaccion::movimiento_vertical(esfera2, tablero))
+			esfera2.setVel(0.0f, -5.0f);
 		break;
 	}
 }

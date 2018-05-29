@@ -19,6 +19,11 @@ void ObjetoMovil::setPos(float x, float y)
 	posicion.y = y;
 }
 
+void ObjetoMovil::setPos(int i, int j)
+{
+	setPos(-45.0f + i * 10, -45.0f + j * 10);
+}
+
 void ObjetoMovil::setPos(Vector2D pos)
 {
 	posicion = pos;
@@ -57,4 +62,26 @@ bool ObjetoMovil::comprobarPos(Tablero t)
 		}
 	}
 	return false;
+}
+
+int ObjetoMovil::columna(Tablero t)
+{
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if ((posicion.x == t.lista_casillas[i][j].posicion.x) && (posicion.y == t.lista_casillas[i][j].posicion.y))
+				return i;
+		}
+	}
+	return 0;
+}
+
+int ObjetoMovil::fila(Tablero t)
+{
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if ((posicion.x == t.lista_casillas[i][j].posicion.x) && (posicion.y == t.lista_casillas[i][j].posicion.y))
+				return j;
+		}
+	}
+	return 0;
 }

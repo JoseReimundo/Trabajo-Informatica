@@ -184,6 +184,37 @@ void Interaccion::choque(Cubo & b, Caja c)
 	if (b.posicion.y >= ymax)b.posicion.y = ymax;
 }
 
+void Interaccion::choque(Esfera & e1, Esfera &e2)
+{
+	Vector2D pos1 = e1.posicion;	// Inicio
+	Vector2D pos2 = e2.posicion;	// Final
+	float dist;
+	Vector2D dif = e1.posicion - e2.posicion;
+	dist = dif.modulo();
+	if (dist < 10.0f) {
+		if (pos1.y == pos2.y) {
+			if (pos1.x < pos2.x) {
+				e1.setPos(pos2.x - 10.0f, e1.posicion.y);
+				//e2.setPos(e1.posicion.x + 10.0f, e2.posicion.y);
+			}
+			if (pos1.x > pos2.x) {
+				e1.setPos(pos2.x + 10.0f, e1.posicion.y);
+				//e2.setPos(e1.posicion.x - 10.0f, e2.posicion.y);
+			}
+		}
+		else if (pos1.x == pos2.x) {
+			if (pos1.y < pos2.y) {
+				e1.setPos(e1.posicion.x, pos2.y - 10.0f);
+				//e2.setPos(e2.posicion.x, e1.posicion.y + 10.0f);
+			}
+			if (pos1.y > pos2.y) {
+				e1.setPos(e1.posicion.x , pos2.y + 10.0f);
+				//e2.setPos(e2.posicion.x, e1.posicion.y - 10.0f);
+			}
+		}
+	}
+}
+
 void Interaccion::choque(Esfera & e, Cubo c)
 {
 	Vector2D dist;
@@ -218,6 +249,13 @@ bool Interaccion::movimiento_horizontal(Esfera & e, Tablero t)
 	return false;
 }
 
+Vector2D Interaccion::ultimaCasilla(Esfera e, Tablero t)
+{
+	if (e.comprobarPos(t)) {
+		return e.posicion;
+	}
+}
+
 void Interaccion::desplazamiento(Cubo & c, Tablero t, float vx, float vy)
 {
 	Vector2D aux;
@@ -227,4 +265,7 @@ void Interaccion::desplazamiento(Cubo & c, Tablero t, float vx, float vy)
 	}
 	if (((c.posicion.x == aux.x) && (c.posicion.y == aux.y + 10.0f)) || ((c.posicion.x == aux.x) && (c.posicion.y == aux.y - 10.0f)) || ((c.posicion.x == aux.x + 10.0f) && (c.posicion.y == aux.y)) || ((c.posicion.x == aux.x - 10.0f) && (c.posicion.y == aux.y)))
 		c.setVel(0.0f, 0.0f);
+}
+
+void Interaccion::desplazamiento_dcha(Cubo & c, Tablero t){
 }

@@ -20,4 +20,5 @@ public:
 
 	friend class ObjetoMovil;
 	friend class Interaccion;
+	friend class Mundo;
 };
